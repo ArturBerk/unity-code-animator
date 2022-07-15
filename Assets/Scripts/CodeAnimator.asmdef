@@ -32,7 +32,8 @@
         "System.Windows.Forms.dll",
         "System.Composition.Convention.dll",
         "Microsoft.CodeAnalysis.CSharp.Workspaces.dll",
-        "Microsoft.CodeAnalysis.CSharp.Scripting.dll"
+        "Microsoft.CodeAnalysis.CSharp.Scripting.dll",
+        "DiffPlex.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],

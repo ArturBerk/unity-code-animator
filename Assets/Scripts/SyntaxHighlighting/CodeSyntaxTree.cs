@@ -10,12 +10,14 @@ namespace CodeAnimator
 
         public CodeSyntaxTree(string code)
         {
-            syntaxTree = CSharpSyntaxTree.ParseText(code, CSharpParseOptions.Default);
+            syntaxTree = CSharpSyntaxTree.ParseText(code,
+                CSharpParseOptions.Default.WithPreprocessorSymbols("UNITY_EDITOR"));
         }
-        
+
         public CodeSyntaxTree(SourceText code)
         {
-            syntaxTree = CSharpSyntaxTree.ParseText(code, CSharpParseOptions.Default);
+            syntaxTree = CSharpSyntaxTree.ParseText(code,
+                CSharpParseOptions.Default.WithPreprocessorSymbols("UNITY_EDITOR"));
         }
     }
 }

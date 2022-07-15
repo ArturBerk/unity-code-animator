@@ -25,10 +25,17 @@ namespace CodeAnimator
         {
             var code = File.ReadAllText(filepath);
 
-            var tree = SyntaxParser.Parse(code);
-            code = SyntaxHighlighter.Highlight(tree, Style.VisualStudio);
-            //Debug.Log(code);
-            
+            if (animator.HighlightCs)
+            {
+                var tree = SyntaxParser.Parse(code);
+                code = SyntaxHighlighter.Highlight(tree, Style.VisualStudio);
+                //Debug.Log(code);
+            }
+            else
+            {
+                code = SimpleHighlighter.Highlight(code, Style.VisualStudio);
+            }
+
             return animator.SetLinesAsync(code.Split('\n'), filepath);
         }
 

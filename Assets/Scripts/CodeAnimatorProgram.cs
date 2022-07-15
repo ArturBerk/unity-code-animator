@@ -27,9 +27,9 @@ namespace CodeAnimator
         {
             directory = PlayerPrefs.GetString("RootDirectory", Application.dataPath);
 
-            var file = File.ReadAllText(@"C:\UnityProjects\YoutubeProject1\Assets\Scripts\Systems\Utils\Events\EventBufferSystem.cs");
-            var tree = SyntaxParser.Parse(file);
-            var code = SyntaxHighlighter.Highlight(tree, Style.VisualStudio);
+            // var file = File.ReadAllText(@"C:\UnityProjects\YoutubeProject1\Assets\Scripts\Systems\Utils\Events\EventBufferSystem.cs");
+            // var tree = SyntaxParser.Parse(file);
+            // var code = SyntaxHighlighter.Highlight(tree, Style.VisualStudio);
             //Debug.Log(code);
         }
 

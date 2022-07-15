@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
@@ -21,6 +20,9 @@ namespace CodeAnimator
         
         [SerializeField] private CodeLine lineTemplate;
         [SerializeField] private TextMeshProUGUI nameText;
+        [SerializeField] private bool highlightCS;
+
+        public bool HighlightCs => highlightCS;
 
         public string recordDirectory = "..";
 
@@ -67,6 +69,16 @@ namespace CodeAnimator
         public async UniTask SetLinesAsync(string[] newLines, string filename)
         {
             var currentLines = this.lines.Select(l => l.OriginalLine).ToArray();
+
+            for (var index = 0; index < newLines.Length; index++)
+            {
+                var newLine = newLines[index];
+                if (string.IsNullOrWhiteSpace(newLine)) newLines[index] = " ";
+            }
+
+            // var diff2 = new Differ();
+            // var diffResult = diff2.CreateLineDiffs(string.Join("\n", currentLines), string.Join("\n", newLines), false);
+            // diffResult.
             var diff = new MyersDiff<string>(currentLines, newLines, true);
             var changes = diff.Execute();
 
@@ -138,7 +150,7 @@ namespace CodeAnimator
                 }
                 
                 Layout();
-                await UniTask.Delay(1000);
+                await UniTask.Delay(500);
             }
             
             if (recorderWindow != null)

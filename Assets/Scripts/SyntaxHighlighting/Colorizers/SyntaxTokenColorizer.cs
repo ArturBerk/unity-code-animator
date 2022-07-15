@@ -69,6 +69,8 @@ namespace CodeAnimator
                 {"as", keywordGetter},
                 {"catch", keywordGetter},
                 {"event", keywordGetter},
+                {"delegate", keywordGetter},
+                {"continue", keywordGetter},
             };
         }
         
@@ -80,6 +82,10 @@ namespace CodeAnimator
             if (tokenColorGetters.TryGetValue(text, out var getter))
             {
                 writer.WriteColored(token, getter(context));
+            }
+            else if (text.StartsWith("#"))
+            {
+                writer.WriteColored(token, context.Style.KeywordsColor);
             }
             else
             {

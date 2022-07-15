@@ -9,28 +9,34 @@ namespace CodeAnimator
     [RequireComponent(typeof(RectTransform))]
     public class VerticalGroup : MonoBehaviour
     {
+        [SerializeField]
+        private float leftmargin;
+        [SerializeField]
+        private float rightmargin;
+        
         public void Layout()
         {
             var rectTransform = (RectTransform)transform;
             var y = 0.0f;
+            var rectWidth = rectTransform.rect.width - (leftmargin + rightmargin);
             for (int i = 0; i < rectTransform.childCount; i++)
             {
                 var child = (RectTransform)rectTransform.GetChild(i);
                 
                 var layout = child.GetComponent<ILayoutElement>();
-                
-                child.sizeDelta = new Vector2(rectTransform.rect.width, 0);
+
+                child.sizeDelta = new Vector2(rectWidth, 0);
                 layout.CalculateLayoutInputHorizontal();
                 //child.sizeDelta = new Vector2(rectTransform.rect.x, 0);
                 layout.CalculateLayoutInputVertical();
                 
                 var height = LayoutUtility.GetPreferredHeight(child);
-                child.sizeDelta = new Vector2(rectTransform.rect.width, height);
+                child.sizeDelta = new Vector2(rectWidth, height);
                 
                 child.anchorMin = Vector2.up;
                 child.anchorMax = Vector2.up;
                 
-                SetPosition(child, new Vector2(0, y));
+                SetPosition(child, new Vector2(leftmargin, y));
                 
                 y -= height;
             }

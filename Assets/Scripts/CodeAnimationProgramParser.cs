@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -31,7 +32,7 @@ namespace CodeAnimator
         public IList<IAnimatorCommand> Parse(string program)
         {
             var commands = new List<IAnimatorCommand>();
-            foreach (var line in program.Split('\n'))
+            foreach (var line in program.Split(new [] {'\n'}, StringSplitOptions.RemoveEmptyEntries))
             {
                 var match = changeWorkingPath.Match(line);
                 if (match.Success)
